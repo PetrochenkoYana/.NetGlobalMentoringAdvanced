@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1525
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Module3_LayeredArchitectures-Task1", "Module3_LayeredArchitectures-Task1.csproj", "{BEEEEA63-DD6A-436E-9507-EC8E77404C0C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BEEEEA63-DD6A-436E-9507-EC8E77404C0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEEEEA63-DD6A-436E-9507-EC8E77404C0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEEEEA63-DD6A-436E-9507-EC8E77404C0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEEEEA63-DD6A-436E-9507-EC8E77404C0C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {96681B79-5B21-4120-B45F-C07B5558B325}
+	EndGlobalSection
+EndGlobal

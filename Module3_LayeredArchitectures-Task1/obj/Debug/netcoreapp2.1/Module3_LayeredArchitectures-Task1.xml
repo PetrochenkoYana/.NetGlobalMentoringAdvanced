@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Module3_LayeredArchitectures-Task1</name>
+    </assembly>
+    <members>
+        <member name="M:Module3_LayeredArchitectures_Task1.Controllers.CartController.CartInfo(System.String)">
+            <summary>
+            Get cart info object
+            </summary>
+            <param name="id">Cart Id</param>
+            <returns></returns>
+        </member>
+        <member name="M:Module3_LayeredArchitectures_Task1.Controllers.CartController.AddItem(System.String,Module3_LayeredArchitectures_Task1.Item)">
+            <summary>
+            Add item to the cart
+            </summary>
+            <param name="id">Cart Id</param>
+            <param name="item">Item object</param>
+            <returns></returns>
+            <response code="201">Returns the newly created cart with item inside</response>
+            <response code="200">If the item is added</response>
+        </member>
+        <member name="M:Module3_LayeredArchitectures_Task1.Controllers.CartController.Delete(System.String,System.String)">
+            <summary>
+            Remove item from the cart
+            </summary>
+            <param name="id">Cart Id</param>
+            <param name="itemId">Item Id</param>
+            <returns></returns>
+            <response code="200">If the item is deleted</response>
+            <response code="404">If cart with id was not found</response>
+        </member>
+        <member name="T:Module3_LayeredArchitectures_Task1.Controllers.V2CartController">
+            <summary>
+            V2
+            </summary>
+        </member>
+        <member name="M:Module3_LayeredArchitectures_Task1.Controllers.V2CartController.CartInfo(System.String)">
+            <summary>
+            v2/ Get cart info object
+            </summary>
+            <param name="id">Cart Id</param>
+            <returns></returns>
+        </member>
+        <member name="M:Module3_LayeredArchitectures_Task1.Controllers.V2CartController.AddItem(System.String,Module3_LayeredArchitectures_Task1.Item)">
+            <summary>
+            Add item to the cart
+            </summary>
+            <param name="id">Cart Id</param>
+            <param name="item">Item object</param>
+            <returns></returns>
+            <response code="201">Returns the newly created cart with item inside</response>
+            <response code="200">If the item is added</response>
+        </member>
+        <member name="M:Module3_LayeredArchitectures_Task1.Controllers.V2CartController.Delete(System.String,System.String)">
+            <summary>
+            Remove item from the cart
+            </summary>
+            <param name="id">Cart Id</param>
+            <param name="itemId">Item Id</param>
+            <returns></returns>
+            <response code="200">If the item is deleted</response>
+            <response code="404">If cart with id was not found</response>
+        </member>
+    </members>
+</doc>
