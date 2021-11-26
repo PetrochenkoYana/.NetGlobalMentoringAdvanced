@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Module3_LayeredArchitectures_Task1.BusinessLogic;
@@ -28,9 +29,9 @@ namespace Module3_LayeredArchitectures_Task1.Controllers
         /// <param name="id">Cart Id</param>
         /// <returns></returns>
         [Route("{id}"), HttpGet]
-        public IActionResult CartInfo(string id)
+        public async Task<IActionResult> CartInfoAsync(string id)
         {
-            var obj = JsonConvert.SerializeObject(_cartingService.GetItemList(new ObjectId(id)));
+            var obj = await _cartingService.GetItemListAsync(new ObjectId(id));
 
             return Ok(obj);
         }
@@ -44,15 +45,15 @@ namespace Module3_LayeredArchitectures_Task1.Controllers
         /// <response code="201">Returns the newly created cart with item inside</response>
         /// <response code="200">If the item is added</response>
         [Route("{id}/item"), HttpPost]
-        public IActionResult AddItem([FromRoute]string id, [FromBody] Item item)
+        public async Task<IActionResult> AddItemAsync([FromRoute]string id, [FromBody] Item item)
         {
-            if (_cartingService.GetCartInfo(new ObjectId(id)) != null)
+            if (await _cartingService.GetCartInfo(new ObjectId(id)) != null)
             {
-                _cartingService.AddItem(new ObjectId(id), item);
+                await _cartingService.AddItemAsync(new ObjectId(id), item);
                 return Ok();
             }
 
-            var cartCreated = _cartingService.Create(new[] { item });
+            var cartCreated = await _cartingService.CreateAsync(new[] { item });
             return Created($"v2/cart/{cartCreated.Id}", cartCreated);
         }
 
@@ -67,11 +68,11 @@ namespace Module3_LayeredArchitectures_Task1.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [Route("{id}/item/{itemId}"), HttpDelete]
-        public IActionResult Delete(string id, string itemId)
+        public async Task<IActionResult> Delete(string id, string itemId)
         {
-            if (_cartingService.GetCartInfo(new ObjectId(id)) != null)
+            if (await _cartingService.GetCartInfo(new ObjectId(id)) != null)
             {
-                _cartingService.RemoveItem(new ObjectId(id), new ObjectId(itemId));
+                await _cartingService.RemoveItemAsync(new ObjectId(id), new ObjectId(itemId));
 
                 return Ok();
             }

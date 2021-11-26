@@ -9,10 +9,10 @@ namespace Module3_LayeredArchitectures_Task1.DataAccess
 {
     public interface ICartingRepository
     {
-        Cart GetCartInfo(ObjectId cartId);
-        IEnumerable<Item> GetItemList(ObjectId cartId);
-        void AddItem(ObjectId cartId, Item item);
-        void RemoveItem(ObjectId cartId, ObjectId itemId);
-        Cart Create(IEnumerable<Item> items);
+        Task<Cart> GetCartInfoAsync(ObjectId cartId);
+        Task<IEnumerable<Item>> GetItemListAsync(ObjectId cartId);
+        Task AddItemAsync(ObjectId cartId, Item item);
+        Task RemoveItemAsync(ObjectId cartId, ObjectId itemId);
+        Task<Cart> CreateAsync(IEnumerable<Item> items);
     }
 }

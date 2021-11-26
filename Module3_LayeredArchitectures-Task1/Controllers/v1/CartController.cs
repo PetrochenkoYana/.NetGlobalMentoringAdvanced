@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Module3_LayeredArchitectures_Task1.BusinessLogic;
 using MongoDB.Bson;
-using Newtonsoft.Json;
 
 namespace Module3_LayeredArchitectures_Task1.Controllers
 {
@@ -25,11 +25,11 @@ namespace Module3_LayeredArchitectures_Task1.Controllers
         /// <param name="id">Cart Id</param>
         /// <returns></returns>
         [Route("{id}"), HttpGet]
-        public IActionResult CartInfo(string id)
+        public async Task<IActionResult> CartInfoAsync(string id)
         {
-            var obj = JsonConvert.SerializeObject(_cartingService.GetCartInfo(new ObjectId(id)));
+            var cart = await _cartingService.GetCartInfo(new ObjectId(id));
 
-            return Ok(obj);
+            return Ok(cart);
         }
 
         /// <summary>
@@ -43,15 +43,15 @@ namespace Module3_LayeredArchitectures_Task1.Controllers
         [Route("{id}/item"), HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public IActionResult AddItem([FromRoute]string id, [FromBody] Item item)
+        public async Task<IActionResult> AddItemAsync([FromRoute]string id, [FromBody] Item item)
         {
-            if (_cartingService.GetCartInfo(new ObjectId(id)) != null)
+            if (await _cartingService.GetCartInfo(new ObjectId(id)) != null)
             {
-                _cartingService.AddItem(new ObjectId(id), item);
+                await _cartingService.AddItemAsync(new ObjectId(id), item);
                 return Ok();
             }
 
-            var cartCreated = _cartingService.Create(new[] { item });
+            var cartCreated = await _cartingService.CreateAsync(new[] { item });
             return Created($"v1/cart/{cartCreated.Id}", cartCreated);
         }
 
@@ -66,11 +66,11 @@ namespace Module3_LayeredArchitectures_Task1.Controllers
         [Route("{id}/item/{itemId}"), HttpDelete]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public IActionResult Delete([FromRoute]string id, [FromRoute]string itemId)
+        public async Task<IActionResult> DeleteAsync([FromRoute]string id, [FromRoute]string itemId)
         {
-            if (_cartingService.GetCartInfo(new ObjectId(id)) != null)
+            if (await _cartingService.GetCartInfo(new ObjectId(id)) != null)
             {
-                _cartingService.RemoveItem(new ObjectId(id), new ObjectId(itemId));
+                await _cartingService.RemoveItemAsync(new ObjectId(id), new ObjectId(itemId));
 
                 return Ok();
             }

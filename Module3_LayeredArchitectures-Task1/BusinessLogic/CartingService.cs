@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Module3_LayeredArchitectures_Task1.DataAccess;
 using MongoDB.Bson;
 
@@ -13,29 +14,29 @@ namespace Module3_LayeredArchitectures_Task1.BusinessLogic
             _cartingRepository = cartingRepository;
         }
 
-        public Cart GetCartInfo(ObjectId cartId)
+        public async Task<Cart> GetCartInfo(ObjectId cartId)
         {
-            return _cartingRepository.GetCartInfo(cartId);
+            return await _cartingRepository.GetCartInfoAsync(cartId);
         }
 
-        public IEnumerable<Item> GetItemList(ObjectId cartId)
+        public async Task<IEnumerable<Item>> GetItemListAsync(ObjectId cartId)
         {
-            return _cartingRepository.GetItemList(cartId);
+            return await _cartingRepository.GetItemListAsync(cartId);
         }
 
-        public void AddItem(ObjectId cartId, Item item)
+        public async Task AddItemAsync(ObjectId cartId, Item item)
         {
-            _cartingRepository.AddItem(cartId, item);
+            await _cartingRepository.AddItemAsync(cartId, item);
         }
 
-        public void RemoveItem(ObjectId cartId, ObjectId itemId)
+        public async Task RemoveItemAsync(ObjectId cartId, ObjectId itemId)
         {
-            _cartingRepository.RemoveItem(cartId, itemId);
+            await _cartingRepository.RemoveItemAsync(cartId, itemId);
         }
 
-        public Cart Create(IEnumerable<Item> items)
+        public async Task<Cart> CreateAsync(IEnumerable<Item> items)
         {
-            return _cartingRepository.Create(items);
+            return await _cartingRepository.CreateAsync(items);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using MongoDB.Bson;
 
 namespace Module3_LayeredArchitectures_Task1.DataAccess
@@ -13,29 +14,29 @@ namespace Module3_LayeredArchitectures_Task1.DataAccess
             _dataContext = dataContext;
         }
 
-        public Cart GetCartInfo(ObjectId cartId)
+        public async Task<Cart> GetCartInfoAsync(ObjectId cartId)
         {
-            return _dataContext.GetCartInfo(cartId);
+            return await _dataContext.GetCartInfoAsync(cartId);
         }
 
-        public IEnumerable<Item> GetItemList(ObjectId cartId)
+        public async Task<IEnumerable<Item>> GetItemListAsync(ObjectId cartId)
         {
-            return _dataContext.GetItemList(cartId);
+            return await _dataContext.GetItemListAsync(cartId);
         }
 
-        public void AddItem(ObjectId cartId, Item item)
+        public async Task AddItemAsync(ObjectId cartId, Item item)
         {
-            _dataContext.AddItem(cartId, item);
+            await _dataContext.AddItem(cartId, item);
         }
 
-        public void RemoveItem(ObjectId cartId, ObjectId itemId)
+        public async Task RemoveItemAsync(ObjectId cartId, ObjectId itemId)
         {
-            _dataContext.RemoveItem(cartId, itemId);
+            await _dataContext.RemoveItem(cartId, itemId);
         }
 
-        public Cart Create(IEnumerable<Item> items)
+        public async Task<Cart> CreateAsync(IEnumerable<Item> items)
         {
-            return _dataContext.Create(items);
+            return await _dataContext.CreateAsync(items);
         }
     }
 }

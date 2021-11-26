@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -17,40 +18,41 @@ namespace Module3_LayeredArchitectures_Task1.DataAccess
             _database = client.GetDatabase("Catalog");
         }
 
-        public Cart GetCartInfo(ObjectId cartId)
+        public async Task<Cart> GetCartInfoAsync(ObjectId cartId)
         {
             var filter = Builders<Cart>.Filter.Eq("_id", cartId);
             var collection = _database.GetCollection<Cart>("Carts");
-            return collection.Find(filter).ToListAsync().Result.FirstOrDefault(); ;
+            var carts = await collection.FindAsync(filter);
+            return carts.FirstOrDefault();
         }
 
-        public ICollection<Item> GetItemList(ObjectId cartId)
+        public async Task<ICollection<Item>> GetItemListAsync(ObjectId cartId)
         {
             var filter = Builders<Cart>.Filter.Eq("_id", cartId);
             var collection = _database.GetCollection<Cart>("Carts");
-            var cart = collection.Find(filter).ToListAsync().Result.FirstOrDefault();
-            return cart?.Items;
+            var carts = await collection.FindAsync(filter);
+            return carts.FirstOrDefault()?.Items;
         }
 
-        public void AddItem(ObjectId cartId, Item item)
+        public async Task AddItem(ObjectId cartId, Item item)
         {
             var filter = Builders<Cart>.Filter.Eq("_id", cartId);
             var update = Builders<Cart>.Update.AddToSet("items", item);
-            _database.GetCollection<Cart>("Carts").UpdateOne(filter, update);
+            await _database.GetCollection<Cart>("Carts").UpdateOneAsync(filter, update);
         }
 
-        public void RemoveItem(ObjectId cartId, ObjectId itemId)
+        public async Task RemoveItem(ObjectId cartId, ObjectId itemId)
         {
             var filter = Builders<Cart>.Filter.Eq("_id", cartId);
             var filterItems = Builders<Cart>.Filter.Eq("_id", itemId);
             var delete = Builders<Cart>.Update.PullFilter("items", filterItems);
-            _database.GetCollection<Cart>("Carts").UpdateOne(filter, delete);
+            await _database.GetCollection<Cart>("Carts").UpdateOneAsync(filter, delete);
         }
 
-        public Cart Create(IEnumerable<Item> items)
+        public async Task<Cart> CreateAsync(IEnumerable<Item> items)
         {
             var cart = new Cart() { Items = items.ToList() };
-            _database.GetCollection<Cart>("Carts").InsertOne(cart);
+            await _database.GetCollection<Cart>("Carts").InsertOneAsync(cart);
             return cart;
         }
     }

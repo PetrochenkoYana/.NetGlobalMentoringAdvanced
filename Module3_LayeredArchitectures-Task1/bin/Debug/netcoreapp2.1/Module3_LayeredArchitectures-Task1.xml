@@ -4,14 +4,14 @@
         <name>Module3_LayeredArchitectures-Task1</name>
     </assembly>
     <members>
-        <member name="M:Module3_LayeredArchitectures_Task1.Controllers.CartController.CartInfo(System.String)">
+        <member name="M:Module3_LayeredArchitectures_Task1.Controllers.CartController.CartInfoAsync(System.String)">
             <summary>
             Get cart info object
             </summary>
             <param name="id">Cart Id</param>
             <returns></returns>
         </member>
-        <member name="M:Module3_LayeredArchitectures_Task1.Controllers.CartController.AddItem(System.String,Module3_LayeredArchitectures_Task1.Item)">
+        <member name="M:Module3_LayeredArchitectures_Task1.Controllers.CartController.AddItemAsync(System.String,Module3_LayeredArchitectures_Task1.Item)">
             <summary>
             Add item to the cart
             </summary>
@@ -21,7 +21,7 @@
             <response code="201">Returns the newly created cart with item inside</response>
             <response code="200">If the item is added</response>
         </member>
-        <member name="M:Module3_LayeredArchitectures_Task1.Controllers.CartController.Delete(System.String,System.String)">
+        <member name="M:Module3_LayeredArchitectures_Task1.Controllers.CartController.DeleteAsync(System.String,System.String)">
             <summary>
             Remove item from the cart
             </summary>
@@ -36,14 +36,14 @@
             V2
             </summary>
         </member>
-        <member name="M:Module3_LayeredArchitectures_Task1.Controllers.V2CartController.CartInfo(System.String)">
+        <member name="M:Module3_LayeredArchitectures_Task1.Controllers.V2CartController.CartInfoAsync(System.String)">
             <summary>
             v2/ Get cart info object
             </summary>
             <param name="id">Cart Id</param>
             <returns></returns>
         </member>
-        <member name="M:Module3_LayeredArchitectures_Task1.Controllers.V2CartController.AddItem(System.String,Module3_LayeredArchitectures_Task1.Item)">
+        <member name="M:Module3_LayeredArchitectures_Task1.Controllers.V2CartController.AddItemAsync(System.String,Module3_LayeredArchitectures_Task1.Item)">
             <summary>
             Add item to the cart
             </summary>
