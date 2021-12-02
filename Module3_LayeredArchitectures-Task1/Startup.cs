@@ -73,6 +73,9 @@ namespace Module3_LayeredArchitectures_Task1
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            var reciever = new QueueReceiver(Configuration);
+            reciever.SetUp();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
